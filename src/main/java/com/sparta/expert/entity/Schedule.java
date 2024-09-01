@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity
@@ -37,6 +38,9 @@ public class Schedule {
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Comment> comments;
 
 
     public Schedule(ScheduleRequestDto scheduleRequestDto){
